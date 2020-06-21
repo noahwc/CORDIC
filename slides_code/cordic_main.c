@@ -39,4 +39,6 @@ void main( void) {
   y_i = xy >> 16 & 0xffff;
   verify( x_i_init, y_i_init, z_i_init, x_i, y_i, z_i);
 
+  return;
+
 } /*** END of main() function ***/
