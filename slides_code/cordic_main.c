@@ -33,4 +33,6 @@ void main( void) {
   cordic_V_fixed_point( &x_i, &y_i, &z_i);
   verify( x_i_init, y_i_init, z_i_init, x_i, y_i, z_i);
 
+  return;
+
 } /*** END of main() function ***/
