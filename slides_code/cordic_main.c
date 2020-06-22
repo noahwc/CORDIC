@@ -11,6 +11,10 @@ void verify( int x_i_init, int y_i_init, int z_i_init, int x_i, int y_i, int z_i
   y_d_init = (double)y_i_init / ( 1 << 15); /* float image of y */
   z_d_init = (double)z_i_init / ( 1 << 15); /* float image of z */
 
+  x_d = (double)x_i / ( 1 << 15); /* float image of x */
+  y_d = (double)y_i / ( 1 << 15); /* float image of y */
+  z_d = (double)z_i / ( 1 << 15); /* float image of z */
+
   printf( "x_i_init = %5i\tx_d_init = %f\n", x_i_init, x_d_init);
   printf( "y_i_init = %5i\ty_d_init = %f\n", y_i_init, y_d_init);
   printf( "z_i_init = %5i\tz_d_init = %f (rad)\n\n", z_i_init, z_d_init);
