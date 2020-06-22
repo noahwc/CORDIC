@@ -8,13 +8,13 @@ int cordic_V_fixed_point(int xy, int *z); /* defined in cordic_V_fixed_point */
 void verify( int x_i_init, int y_i_init, int z_i_init, int x_i, int y_i, int z_i) {
 
   double x_d_init, y_d_init, z_d_init, x_d, y_d, z_d;
-  x_d_init = (double)x_i_init / ( 1 << 15); /* float image of x */
+    x_d_init = (double)x_i_init / ( 1 << 15); /* float image of x */
   y_d_init = (double)y_i_init / ( 1 << 15); /* float image of y */
   z_d_init = (double)z_i_init / ( 1 << 15); /* float image of z */
 
-  x_d = (double)x_i / ( 1 << 15); /* this prints the wrong value right now */
-  y_d = (double)y_i / ( 1 << 15); /* this value is slightly off */
-  z_d = (double)z_i / ( 1 << 15); /* float image of final z value */
+  x_d = (double)x_i / ( 1 << 15); /* float image of x */
+  y_d = (double)y_i / ( 1 << 15); /* float image of y */
+  z_d = (double)z_i / ( 1 << 15); /* float image of z */
 
   printf( "x_i_init = %5i\tx_d_init = %f\n", x_i_init, x_d_init);
   printf( "y_i_init = %5i\ty_d_init = %f\n", y_i_init, y_d_init);
@@ -38,7 +38,7 @@ void main( void) {
   time_t start = clock();
   int xy = 0;
   for(int i = 0; i < 10000; i++){
-    int xy = cordic_V_fixed_point(y_i << 16 | x_i, &z_i);
+    xy = cordic_V_fixed_point(y_i << 16 | x_i, &z_i);
   }
   printf("%i \n", xy);
   x_i = xy & 0xffff;
