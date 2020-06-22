@@ -6,7 +6,7 @@ int cordic_V_fixed_point(int xy, int *z) {
   int i;
 
   x_temp_1 = xy & 0xffff;
-  y_temp_1 = xy >> 16 & 0xffff;
+  y_temp_1 = (xy >> 16) & 0xffff;
   z_temp = 0;
 
   for( i=0; i<15; i++) { /* 15 iterations are needed */

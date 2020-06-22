@@ -12,8 +12,8 @@ void verify( int x_i_init, int y_i_init, int z_i_init, int x_i, int y_i, int z_i
   y_d_init = (double)y_i_init / ( 1 << 15); /* float image of y */
   z_d_init = (double)z_i_init / ( 1 << 15); /* float image of z */
 
-  //x_d = (double)x_i / ( 1 << 15); /* this prints the wrong value right now */
-  //y_d = (double)y_i / ( 1 << 15); /* this value is slightly off */
+  x_d = (double)x_i / ( 1 << 15); /* this prints the wrong value right now */
+  y_d = (double)y_i / ( 1 << 15); /* this value is slightly off */
   z_d = (double)z_i / ( 1 << 15); /* float image of final z value */
 
   printf( "x_i_init = %5i\tx_d_init = %f\n", x_i_init, x_d_init);
@@ -36,12 +36,13 @@ void main( void) {
 
   printf( "Vectoring CORDIC:\n\n");
   time_t start = clock();
-  int xy;
+  int xy = 0;
   for(int i = 0; i < 10000; i++){
-    int xy = cordic_V_fixed_point( y_i << 16 | x_i, &z_i);
+    int xy = cordic_V_fixed_point(y_i << 16 | x_i, &z_i);
   }
+  printf("%i \n", xy);
   x_i = xy & 0xffff;
-  y_i = xy >> 16 & 0xffff;
+  y_i = (xy >> 16) & 0xffff;
   time_t end = clock();
   printf("Execution time: %li \n", end - start);
 
