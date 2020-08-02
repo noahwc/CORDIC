@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <math.h>
-#include <time.h>
 
 int z_table[15] = { 25735, 15192, 8027, 4074, 2045, 1023, 511, 255, 127, 63, 31, 15, 7, 3, 1};
 int cordic_V_fixed_point(int xy, int *z); /* defined in cordic_V_fixed_point */
@@ -35,16 +34,12 @@ void main( void) {
   z_i_init = 23906;
 
   printf( "Vectoring CORDIC:\n\n");
-  time_t start = clock();
+  
   int xy = 0;
-  for(int i = 0; i < 10000; i++){
-    xy = cordic_V_fixed_point(y_i << 16 | x_i, &z_i);
-  }
-  printf("%i \n", xy);
+
+  xy = cordic_V_fixed_point(y_i << 16 | x_i, &z_i);
   x_i = xy & 0xffff;
   y_i = (xy >> 16) & 0xffff;
-  time_t end = clock();
-  printf("Execution time: %li \n", end - start);
 
   verify( x_i_init, y_i_init, z_i_init, x_i, y_i, z_i);
 

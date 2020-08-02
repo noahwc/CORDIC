@@ -41,6 +41,10 @@
 *.su
 *.idb
 *.pdb
+*.gcov
+*.gcda
+*.gcno
+*.data
 
 # Kernel Module Compile Results
 *.mod*
@@ -50,3 +54,5 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+.vscode/*
