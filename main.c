@@ -3,7 +3,7 @@
 #include <time.h>
 
 int z_table[15] = { 25735, 15192, 8027, 4074, 2045, 1023, 511, 255, 127, 63, 31, 15, 7, 3, 1};
-void cordic_V_fixed_point( int *x, int *y, int *z); /* defined elsewhere */
+int cordic_V_fixed_point( int xy, int *z); /* defined elsewhere */
 
 void verify( int x_i_init, int y_i_init, int z_i_init, int x_i, int y_i, int z_i) {
 
@@ -11,6 +11,10 @@ void verify( int x_i_init, int y_i_init, int z_i_init, int x_i, int y_i, int z_i
   x_d_init = (double)x_i_init / ( 1 << 15); /* float image of x */
   y_d_init = (double)y_i_init / ( 1 << 15); /* float image of y */
   z_d_init = (double)z_i_init / ( 1 << 15); /* float image of z */
+
+  x_d = (double)x_i / ( 1 << 15);
+  y_d = (double)y_i / ( 1 << 15);
+  z_d = (double)z_i / ( 1 << 15);
 
   printf( "x_i_init = %5i\tx_d_init = %f\n", x_i_init, x_d_init);
   printf( "y_i_init = %5i\ty_d_init = %f\n", y_i_init, y_d_init);
@@ -23,21 +27,24 @@ void verify( int x_i_init, int y_i_init, int z_i_init, int x_i, int y_i, int z_i
 } /*** END of verify() function ***/
 
 void main( void) {
-  int x_i_init, y_i_init, z_i_init; /* initial values */
-  int x_i, y_i, z_i;   /* integer (fixed-point) variables */
+  /* initial values */
+  int x_i_init = 27852;
+  int y_i_init = 24903;
+  int z_i_init = 23906;
 
-  x_i = (x_i_init = 27852);
-  y_i = (y_i_init = 24903);
-  z_i_init = 23906;
+  int x_i, y_i, z_i;   /* integer (fixed-point) variables */
+  int xy = 0;
 
   printf( "Vectoring CORDIC:\n\n");
   clock_t start = clock();
   for(int j = 0; j < 100000; j++){
-    cordic_V_fixed_point( &x_i, &y_i, &z_i);
+    xy = cordic_V_fixed_point(y_i_init << 16 | x_i_init, &z_i);
   }
   clock_t finish = clock();
   printf("Execution time for 100000 iterations: %ld \n", finish - start);
 
+  x_i = xy & 0xffff;
+  y_i = (xy >> 16) & 0xffff;
   verify( x_i_init, y_i_init, z_i_init, x_i, y_i, z_i);
 
 } /*** END of main() function ***/

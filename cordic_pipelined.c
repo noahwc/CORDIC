@@ -1,7 +1,6 @@
 #include <stdio.h>
 
 int z_table[15];
-#define NUM_ANGLES = 15;
 
 int cordic_V_fixed_point(int xy, int *z) {
   int x_temp_1, y_temp_1, z_temp;
@@ -12,6 +11,7 @@ int cordic_V_fixed_point(int xy, int *z) {
   y_temp_1 = (xy >> 16) & 0xffff;
   z_temp = 0;
 
+  /* loop prologue */
   if( y_temp_1 > 0) {
     x_temp_2 = x_temp_1 + (y_temp_1 >> 0);
     y_temp_2 = y_temp_1 - (x_temp_1 >> 0);
@@ -36,6 +36,10 @@ int cordic_V_fixed_point(int xy, int *z) {
       z_temp -= z_table[i];
     }
   }
+
+  /* loop epilogue */
+  x_temp_1 = x_temp_2;
+  y_temp_1 = y_temp_2;
 
   *z = z_temp;
 
