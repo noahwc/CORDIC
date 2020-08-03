@@ -1,22 +1,43 @@
 #include <stdio.h>
+#include <math.h>
+#include <time.h>
 
-int main() {
-    int x, y;
+int z_table[15] = { 25735, 15192, 8027, 4074, 2045, 1023, 511, 255, 127, 63, 31, 15, 7, 3, 1};
+void cordic_V_fixed_point( int *x, int *y, int *z); /* defined elsewhere */
 
-    printf("Input the x component.");
-    scanf("%d",&x);
-    printf("Input the y component.");
-    scanf("%d",&y);
+void verify( int x_i_init, int y_i_init, int z_i_init, int x_i, int y_i, int z_i) {
 
-    int theta[28] = {
-        0.78539816339745, 0.46364760900081, 0.24497866312686,  0.12435499454676,
-        0.06241880999596, 0.03123983343027, 0.01562372862048, 0.00781234106010,
-        0.00390623013197, 0.00195312251648, 0.00097656218956, 0.00048828121119,
-        0.00024414062015, 0.00012207031189, 0.00006103515617, 0.00003051757812,
-        0.00001525878906, 0.00000762939453, 0.00000381469727, 0.00000190734863,
-        0.00000095367432, 0.00000047683716, 0.00000023841858, 0.00000011920929,
-        0.00000005960464, 0.00000002980232, 0.00000001490116, 0.00000000745058
-    };
+  double x_d_init, y_d_init, z_d_init, x_d, y_d, z_d;
+  x_d_init = (double)x_i_init / ( 1 << 15); /* float image of x */
+  y_d_init = (double)y_i_init / ( 1 << 15); /* float image of y */
+  z_d_init = (double)z_i_init / ( 1 << 15); /* float image of z */
 
-   return 0;
-}
+  printf( "x_i_init = %5i\tx_d_init = %f\n", x_i_init, x_d_init);
+  printf( "y_i_init = %5i\ty_d_init = %f\n", y_i_init, y_d_init);
+  printf( "z_i_init = %5i\tz_d_init = %f (rad)\n\n", z_i_init, z_d_init);
+
+  printf( "x_i_calc = %5i\tx_d_calc = %f\n", x_i, x_d);
+  printf( "y_i_calc = %5i\ty_d_calc = %f\n", y_i, y_d);
+  printf( "z_i_calc = %5i\tz_d_calc = %f (rad)\n\n", z_i, z_d);
+  printf( "Modulus = SQRT(x_d_init^2 + y_d_init^2) = %f\n", sqrt(x_d_init*x_d_init+y_d_init*y_d_init));
+} /*** END of verify() function ***/
+
+void main( void) {
+  int x_i_init, y_i_init, z_i_init; /* initial values */
+  int x_i, y_i, z_i;   /* integer (fixed-point) variables */
+
+  x_i = (x_i_init = 27852);
+  y_i = (y_i_init = 24903);
+  z_i_init = 23906;
+
+  printf( "Vectoring CORDIC:\n\n");
+  clock_t start = clock();
+  for(int j = 0; j < 100000; j++){
+    cordic_V_fixed_point( &x_i, &y_i, &z_i);
+  }
+  clock_t finish = clock();
+  printf("Execution time for 100000 iterations: %ld \n", finish - start);
+
+  verify( x_i_init, y_i_init, z_i_init, x_i, y_i, z_i);
+
+} /*** END of main() function ***/
