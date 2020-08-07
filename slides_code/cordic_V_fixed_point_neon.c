@@ -15,23 +15,23 @@ int cordic_V_fixed_point(int xy, int *z) {
 
   z_temp = 0;
 
-  int32x2_t sign;
+  int sign; 
 
   for( i=0; i<15; i++) { /* 15 iterations are needed */
       
-    int32x2_t sign = xy_neon[1] > 0 ? {1,-1} : {-1,1};
+    sign = xy_neon[1] > 0 ? 1 : -1;
 
     // shift
     yx_neon[0] = yx_neon[0] >> i;
     yx_neon[1] = yx_neon[1] >> i;
 
-    yx_neon = vmul_s32(yx_neon, sign); // fix signs
-
+    yx_neon[0] *= sign*yx_neon[0]; // fix signs
+    yx_neon[1] *= -sign*yx_neon[1]; // fix signs
     xy_neon = vadd_s32(xy_neon, yx_neon); // add
 
     yx_neon = vrev64_s32(xy_neon); // fix orientation
 
-    z_temp += sign[0]*z_table[i]; // compute z
+    z_temp += sign*z_table[i]; // compute z
 
   }
   
