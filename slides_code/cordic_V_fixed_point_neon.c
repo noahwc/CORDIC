@@ -5,8 +5,10 @@
 int z_table[15];
 
 int cordic_V_fixed_point(int xy, int *z) {
-  int z_temp = 0, i = 1;
-  int sign = (xy >> 16) & 0xffff > 0 ? 1 : -1;
+  int i = 1;
+  int32_t sign = (xy >> 16) & 0xffff > 0 ? 1 : -1;
+
+  int32_t z_temp = 0;
   
   //clock_t start = clock();
 
@@ -39,5 +41,3 @@ int cordic_V_fixed_point(int xy, int *z) {
 
   return xy_neon[1] << 16 | xy_neon[0];
 }
-
-
