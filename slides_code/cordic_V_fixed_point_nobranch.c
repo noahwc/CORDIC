@@ -1,4 +1,4 @@
-#include <time.h>
+//#include <time.h>
 #include <stdio.h>
 
 int z_table[15];
@@ -8,7 +8,7 @@ int cordic_V_fixed_point(int xy, int *z) {
   int x_temp_2, y_temp_2;
   int i;
   
-  clock_t start = clock();
+  //clock_t start = clock();
 
   x_temp_1 = xy & 0xffff;
   y_temp_1 = (xy >> 16) & 0xffff;
@@ -28,8 +28,8 @@ int cordic_V_fixed_point(int xy, int *z) {
     y_temp_1 = y_temp_2;
   }
 
-  clock_t finish = clock();
-  printf("Execution time for 100000 iterations: %ld \n", finish - start);
+  //clock_t finish = clock();
+  //printf("Execution time for 100000 iterations: %ld \n", finish - start);
 
   *z = z_temp;
 
