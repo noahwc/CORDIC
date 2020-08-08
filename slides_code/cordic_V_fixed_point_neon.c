@@ -19,14 +19,10 @@ int cordic_V_fixed_point(int xy, int *z) {
     sign = xy_neon[1] > 0 ? 1 : -1;
 
     // shift
-    yx_neon[0] = yx_neon[0] >> i;
-    yx_neon[1] = yx_neon[1] >> i;
+    yx_neon[0] = sign*(yx_neon[0] >> i);
+    yx_neon[1] = -sign*(yx_neon[1] >> i);
 
     z_temp += sign*z_table[i]; // compute z
-
-    // fix signs
-    yx_neon[0] *=sign;
-    yx_neon[1] *=-sign;
 
     xy_neon = vadd_s32(xy_neon, yx_neon); // add
 
