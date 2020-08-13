@@ -16,7 +16,7 @@
 	.arch armv7-a
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	cordic_V_fixed_point, %function
 cordic_V_fixed_point:
 	@ args = 0, pretend = 0, frame = 32

@@ -16,7 +16,7 @@
 	.arch armv7-a
 	.syntax unified
 	.arm
-	.fpu vfpv3-d16
+	.fpu neon
 	.type	cordic_V_fixed_point, %function
 cordic_V_fixed_point:
 	@ args = 0, pretend = 0, frame = 0
@@ -27,7 +27,7 @@ cordic_V_fixed_point:
 	mvnle	r2, #0
 	mov	r3, #0
 	.syntax divided
-@ 17 "./cordic_V_fixed_point_hw.c" 1
+@ 17 "cordic_V_fixed_point_hw.c" 1
 	cordic_hw	r0, r0, r3
 
 @ 0 "" 2
@@ -42,7 +42,7 @@ cordic_V_fixed_point:
 	movgt	r2, #1
 	mvnle	r2, #0
 	.syntax divided
-@ 17 "./cordic_V_fixed_point_hw.c" 1
+@ 17 "cordic_V_fixed_point_hw.c" 1
 	cordic_hw	r0, r0, lr
 
 @ 0 "" 2
@@ -55,7 +55,7 @@ cordic_V_fixed_point:
 	mvnle	r2, #0
 	mov	lr, #2
 	.syntax divided
-@ 17 "./cordic_V_fixed_point_hw.c" 1
+@ 17 "cordic_V_fixed_point_hw.c" 1
 	cordic_hw	r0, r0, lr
 
 @ 0 "" 2
@@ -68,7 +68,7 @@ cordic_V_fixed_point:
 	mvnle	ip, #0
 	mov	lr, #3
 	.syntax divided
-@ 17 "./cordic_V_fixed_point_hw.c" 1
+@ 17 "cordic_V_fixed_point_hw.c" 1
 	cordic_hw	r0, r0, lr
 
 @ 0 "" 2
@@ -81,7 +81,7 @@ cordic_V_fixed_point:
 	mvnle	ip, #0
 	mov	lr, #4
 	.syntax divided
-@ 17 "./cordic_V_fixed_point_hw.c" 1
+@ 17 "cordic_V_fixed_point_hw.c" 1
 	cordic_hw	r0, r0, lr
 
 @ 0 "" 2
@@ -94,7 +94,7 @@ cordic_V_fixed_point:
 	mvnle	r2, #0
 	mov	lr, #5
 	.syntax divided
-@ 17 "./cordic_V_fixed_point_hw.c" 1
+@ 17 "cordic_V_fixed_point_hw.c" 1
 	cordic_hw	r0, r0, lr
 
 @ 0 "" 2
@@ -107,7 +107,7 @@ cordic_V_fixed_point:
 	mvnle	r2, #0
 	mov	lr, #6
 	.syntax divided
-@ 17 "./cordic_V_fixed_point_hw.c" 1
+@ 17 "cordic_V_fixed_point_hw.c" 1
 	cordic_hw	r0, r0, lr
 
 @ 0 "" 2
@@ -120,7 +120,7 @@ cordic_V_fixed_point:
 	mvnle	ip, #0
 	mov	lr, #7
 	.syntax divided
-@ 17 "./cordic_V_fixed_point_hw.c" 1
+@ 17 "cordic_V_fixed_point_hw.c" 1
 	cordic_hw	r0, r0, lr
 
 @ 0 "" 2
@@ -133,7 +133,7 @@ cordic_V_fixed_point:
 	mvnle	ip, #0
 	mov	lr, #8
 	.syntax divided
-@ 17 "./cordic_V_fixed_point_hw.c" 1
+@ 17 "cordic_V_fixed_point_hw.c" 1
 	cordic_hw	r0, r0, lr
 
 @ 0 "" 2
@@ -146,7 +146,7 @@ cordic_V_fixed_point:
 	mvnle	r2, #0
 	mov	lr, #9
 	.syntax divided
-@ 17 "./cordic_V_fixed_point_hw.c" 1
+@ 17 "cordic_V_fixed_point_hw.c" 1
 	cordic_hw	r0, r0, lr
 
 @ 0 "" 2
@@ -159,7 +159,7 @@ cordic_V_fixed_point:
 	mvnle	r2, #0
 	mov	lr, #10
 	.syntax divided
-@ 17 "./cordic_V_fixed_point_hw.c" 1
+@ 17 "cordic_V_fixed_point_hw.c" 1
 	cordic_hw	r0, r0, lr
 
 @ 0 "" 2
@@ -172,7 +172,7 @@ cordic_V_fixed_point:
 	mvnle	ip, #0
 	mov	lr, #11
 	.syntax divided
-@ 17 "./cordic_V_fixed_point_hw.c" 1
+@ 17 "cordic_V_fixed_point_hw.c" 1
 	cordic_hw	r0, r0, lr
 
 @ 0 "" 2
@@ -185,7 +185,7 @@ cordic_V_fixed_point:
 	mvnle	ip, #0
 	mov	lr, #12
 	.syntax divided
-@ 17 "./cordic_V_fixed_point_hw.c" 1
+@ 17 "cordic_V_fixed_point_hw.c" 1
 	cordic_hw	r0, r0, lr
 
 @ 0 "" 2
@@ -198,7 +198,7 @@ cordic_V_fixed_point:
 	mvnle	r2, #0
 	mov	lr, #13
 	.syntax divided
-@ 17 "./cordic_V_fixed_point_hw.c" 1
+@ 17 "cordic_V_fixed_point_hw.c" 1
 	cordic_hw	r0, r0, lr
 
 @ 0 "" 2
@@ -211,7 +211,7 @@ cordic_V_fixed_point:
 	mvnle	r2, #0
 	mov	lr, #14
 	.syntax divided
-@ 17 "./cordic_V_fixed_point_hw.c" 1
+@ 17 "cordic_V_fixed_point_hw.c" 1
 	cordic_hw	r0, r0, lr
 
 @ 0 "" 2
