@@ -14,7 +14,7 @@ int cordic_V_fixed_point(int xy, int *z) {
       
     sign = xy > 0 ? 1 : -1;
       
- __asm__ __volatile__ (
+    __asm__ __volatile__ (
       "cordic_hw\t%0, %1, %2\n"
       : "=r" (xy)
       : "r" (xy), "r" (i)
@@ -28,4 +28,3 @@ int cordic_V_fixed_point(int xy, int *z) {
 
   return xy;
 }
-

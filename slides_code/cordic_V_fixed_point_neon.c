@@ -9,8 +9,6 @@ int cordic_V_fixed_point(int xy, int *z) {
   int32_t sign = (xy >> 16) & 0xffff > 0 ? 1 : -1;
 
   int32_t z_temp = 0;
-  
-  //clock_t start = clock();
 
   int32x2_t xy_neon = {xy & 0xffff, (xy >> 16) & 0xffff};
 
@@ -33,9 +31,6 @@ int cordic_V_fixed_point(int xy, int *z) {
   }
 
   xy_neon = vmla_n_s32(xy_neon, yx_neon, sign); // add
-
-  //clock_t finish = clock();
-  //printf("Execution time: %ld \n", finish - start);
 
   *z = z_temp;
 
