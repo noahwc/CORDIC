@@ -1,13 +1,18 @@
+#include <time.h>
+#include <stdio.h>
+
 int z_table[15];
 
-void cordic_V_fixed_point( int *x, int *y, int *z) {
+int cordic_V_fixed_point(int xy, int *z) {
   int x_temp_1, y_temp_1, z_temp;
   int x_temp_2, y_temp_2;
   int i;
 
-  x_temp_1 = *x;
-  y_temp_1 = *y;
+  x_temp_1 = xy & 0xffff;
+  y_temp_1 = (xy >> 16) & 0xffff;
   z_temp = 0;
+
+  // clock_t start = clock();
 
   for( i=0; i<15; i++) { /* 15 iterations are needed */
     if( y_temp_1 > 0) {
@@ -23,8 +28,10 @@ void cordic_V_fixed_point( int *x, int *y, int *z) {
     y_temp_1 = y_temp_2;
   }
 
-  *x = x_temp_1;
-  *y = y_temp_1;
+  // clock_t finish = clock();
+  // printf("Execution time for cordic: %ld \n", finish - start);
+
   *z = z_temp;
 
+  return y_temp_1 << 16 | x_temp_1;
 }

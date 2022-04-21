@@ -2,12 +2,12 @@
 #include <math.h>
 
 int z_table[15] = { 25735, 15192, 8027, 4074, 2045, 1023, 511, 255, 127, 63, 31, 15, 7, 3, 1};
-void cordic_V_fixed_point( int *x, int *y, int *z); /* defined elsewhere */
+int cordic_V_fixed_point(int xy, int *z); /* defined in cordic_V_fixed_point */
 
 void verify( int x_i_init, int y_i_init, int z_i_init, int x_i, int y_i, int z_i) {
 
   double x_d_init, y_d_init, z_d_init, x_d, y_d, z_d;
-  x_d_init = (double)x_i_init / ( 1 << 15); /* float image of x */
+    x_d_init = (double)x_i_init / ( 1 << 15); /* float image of x */
   y_d_init = (double)y_i_init / ( 1 << 15); /* float image of y */
   z_d_init = (double)z_i_init / ( 1 << 15); /* float image of z */
 
@@ -34,7 +34,13 @@ void main( void) {
   z_i_init = 23906;
 
   printf( "Vectoring CORDIC:\n\n");
-  cordic_V_fixed_point( &x_i, &y_i, &z_i);
+  
+  int xy = 0;
+
+  xy = cordic_V_fixed_point(y_i << 16 | x_i, &z_i);
+  x_i = xy & 0xffff;
+  y_i = (xy >> 16) & 0xffff;
+
   verify( x_i_init, y_i_init, z_i_init, x_i, y_i, z_i);
 
   return;
